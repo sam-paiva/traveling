@@ -1,0 +1,34 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'destination_controller.dart';
+
+// **************************************************************************
+// StoreGenerator
+// **************************************************************************
+
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+
+mixin _$DestinationController on _DestinationControllerBase, Store {
+  final _$destinationsAtom =
+      Atom(name: '_DestinationControllerBase.destinations');
+
+  @override
+  Destination get destinations {
+    _$destinationsAtom.reportRead();
+    return super.destinations;
+  }
+
+  @override
+  set destinations(Destination value) {
+    _$destinationsAtom.reportWrite(value, super.destinations, () {
+      super.destinations = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+destinations: ${destinations}
+    ''';
+  }
+}
