@@ -4,6 +4,7 @@ class Hotel {
   String address;
   String imageUrl;
   int price;
+  String phone;
   Null createdAt;
   Null updatedAt;
 
@@ -13,6 +14,7 @@ class Hotel {
       this.address,
       this.imageUrl,
       this.price,
+      this.phone,
       this.createdAt,
       this.updatedAt});
 
@@ -21,6 +23,7 @@ class Hotel {
     name = json['name'];
     address = json['address'];
     imageUrl = json['imageUrl'];
+    phone = json['phone'];
     price = json['price'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];

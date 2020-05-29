@@ -9,19 +9,20 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      selectedItemColor: Colors.grey.shade800,
+      selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
+      backgroundColor: Color(0XFFe94f37),
       currentIndex: currentIndex,
       onTap: changePage,
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.group_work),
-          title: Text("Destinos"),
+          icon: Icon(Icons.home),
+          title: Text("Home"),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.flag),
-          title: Text("Hoteis"),
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.hotel),
+        //   title: Text("Hoteis"),
+        // ),
       ],
     );
   }

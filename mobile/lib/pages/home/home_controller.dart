@@ -13,6 +13,7 @@ abstract class _HomeControllerBase with Store {
 
   _HomeControllerBase() {
     getDestinations();
+    getHotels();
   }
 
   @observable

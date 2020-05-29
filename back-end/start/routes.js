@@ -12,5 +12,9 @@ Route.get('/', () => {
 Route.get('/destinations', 'DestinationController.index');
 
 //Hotels
-Route.get('/hotels', 'HotelController.index')
+Route.get('/hotels', 'HotelController.getAll')
+
+//Users
+Route.post('/users', 'UserController.create')
+
 
