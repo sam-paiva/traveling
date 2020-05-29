@@ -20,6 +20,9 @@ abstract class _HomeControllerBase with Store {
   int currentIndex = 0;
 
   @observable
+  bool openDialog = false;
+
+  @observable
   TextEditingController textFieldController = TextEditingController();
 
   @observable
@@ -35,6 +38,11 @@ abstract class _HomeControllerBase with Store {
     } catch (exception) {
       return Container;
     }
+  }
+
+  @action
+  showDialog() {
+    openDialog = !openDialog;
   }
 
   @action

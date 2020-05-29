@@ -24,6 +24,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$openDialogAtom = Atom(name: '_HomeControllerBase.openDialog');
+
+  @override
+  bool get openDialog {
+    _$openDialogAtom.reportRead();
+    return super.openDialog;
+  }
+
+  @override
+  set openDialog(bool value) {
+    _$openDialogAtom.reportWrite(value, super.openDialog, () {
+      super.openDialog = value;
+    });
+  }
+
   final _$textFieldControllerAtom =
       Atom(name: '_HomeControllerBase.textFieldController');
 
@@ -89,6 +104,17 @@ mixin _$HomeController on _HomeControllerBase, Store {
       ActionController(name: '_HomeControllerBase');
 
   @override
+  dynamic showDialog() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.showDialog');
+    try {
+      return super.showDialog();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic changePage(int index) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.changePage');
@@ -103,6 +129,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 currentIndex: ${currentIndex},
+openDialog: ${openDialog},
 textFieldController: ${textFieldController},
 destination: ${destination},
 hotels: ${hotels}

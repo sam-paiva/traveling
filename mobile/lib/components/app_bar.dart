@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile/models/hotel_model.dart';
 import 'package:mobile/pages/hotel/hotel_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Hotel> hotels;
+  final Function showDialog;
 
-  CustomAppBar({Key key, this.hotels})
+  CustomAppBar({Key key, this.hotels, this.showDialog})
       : preferredSize = Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -20,6 +22,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {
             showSearch(
                 context: context, delegate: DataSearch(hotels: this.hotels));
+          },
+        ),
+        IconButton(
+          icon: Icon(
+            FontAwesomeIcons.user,
+            size: 20,
+          ),
+          onPressed: () {
+            showDialog();
           },
         )
       ],

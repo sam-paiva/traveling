@@ -5,6 +5,7 @@ import 'package:mobile/components/app_bar.dart';
 import 'package:mobile/components/destination_carousel.dart';
 import 'package:mobile/components/hotels_carousel.dart';
 import 'package:mobile/pages/home/home_controller.dart';
+import 'package:mobile/pages/login/login_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,9 +13,61 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Escolha a opção'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text(
+                    'Entrar',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => LoginPage()));
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  child: Text(
+                    'Criar Conta',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => LoginPage()));
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget _buildBody() {
     return Scaffold(
-      appBar: CustomAppBar(hotels: this.controller.hotels),
+      appBar: CustomAppBar(
+        hotels: this.controller.hotels,
+        showDialog: _showMyDialog,
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 30.0),
@@ -36,24 +89,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
       ),
     );
-
-    // DestinationCarousel(
-    //     destinations: this.controller.destination,
-    //   )
-  }
-
-  Widget _buildBodyHotels() {
-    return ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: this.controller.hotels.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 50,
-            color: Colors.white,
-            child:
-                Center(child: Text('Entry ${this.controller.hotels[index]}')),
-          );
-        });
   }
 
   @override

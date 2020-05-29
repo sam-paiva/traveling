@@ -6,6 +6,8 @@ import 'package:mobile/pages/home/home_controller.dart';
 import 'package:mobile/pages/home/home_page.dart';
 import 'package:mobile/pages/hotel/hotel_controller.dart';
 import 'package:mobile/pages/hotel/hotel_page.dart';
+import 'package:mobile/pages/login/login_controller.dart';
+import 'package:mobile/pages/login/login_page.dart';
 import 'package:mobile/repositories/traveling_repository.dart';
 
 import 'app_widget.dart';
@@ -16,7 +18,8 @@ class AppModule extends MainModule {
         Bind((i) => TravelingRepository()),
         Bind((i) => HomeController()),
         Bind((i) => DestinationController()),
-        Bind((i) => HotelController())
+        Bind((i) => HotelController()),
+        Bind((i) => LoginController())
       ];
 
   // rotas do módulo
@@ -24,7 +27,8 @@ class AppModule extends MainModule {
   List<Router> get routers => [
         Router("/home", child: (_, args) => HomePage()),
         Router("/destination", child: (_, args) => DestinationPage()),
-        Router("/hotel", child: (_, args) => HotelPage())
+        Router("/hotel", child: (_, args) => HotelPage()),
+        Router("/login", child: (_, args) => LoginPage()),
       ];
 
   //widget principal
