@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile/models/hotel_model.dart';
 import 'package:mobile/pages/hotel/hotel_page.dart';
+import 'package:mobile/pages/login/login_controller.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Hotel> hotels;
   final Function showDialog;
+  final loginController = Modular.get<LoginController>();
 
   CustomAppBar({Key key, this.hotels, this.showDialog})
       : preferredSize = Size.fromHeight(kToolbarHeight),
@@ -15,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text('Traveling'),
-      backgroundColor: Color(0XFFe94f37),
+      backgroundColor: Color(0xFFFF5757),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),
@@ -24,15 +27,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 context: context, delegate: DataSearch(hotels: this.hotels));
           },
         ),
-        IconButton(
-          icon: Icon(
-            FontAwesomeIcons.user,
-            size: 20,
-          ),
-          onPressed: () {
-            showDialog();
-          },
-        )
       ],
     );
   }

@@ -1,15 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mobile/pages/home/home_page.dart';
 
-class LoginPage extends StatelessWidget {
+import 'login_controller.dart';
+
+class LoginPage extends StatefulWidget {
+  @override
+  LoginState createState() => LoginState();
+}
+
+class LoginState extends ModularState<LoginPage, LoginController> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    void _login() async {
+      String email = emailController.text;
+      String password = passwordController.text;
+
+      bool logged = await this.controller.login(email.trim(), password);
+
+      if (logged) {
+        this.controller.getUser(email);
+        Fluttertoast.showToast(
+            msg: "Sucesso na autenticação",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => HomePage()));
+      } else {
+        Fluttertoast.showToast(
+            msg: "Ocorreu um erro na autenticação",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        return;
+      }
+    }
+
+    String _validateLogin(String text) {
+      if (text.isEmpty) {
+        return "Informe o login";
+      }
+      return null;
+    }
+
+    String _validatePassword(String text) {
+      if (text.isEmpty) {
+        return "Informe a senha";
+      }
+      return null;
+    }
+
     return Scaffold(
       body: Container(
         decoration: new BoxDecoration(
           image: new DecorationImage(
             fit: BoxFit.cover,
             colorFilter: new ColorFilter.mode(
-                Colors.black.withOpacity(0.3), BlendMode.dstATop),
+                Colors.black.withOpacity(0.5), BlendMode.dstATop),
             image: AssetImage(
               'assets/background1.jpg',
             ),
@@ -21,15 +86,21 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               width: 128,
               height: 128,
-              child: Image.asset("assets/Traveling.png"),
+              child: Text(
+                'Entrar',
+                style: TextStyle(fontSize: 35, color: Colors.white),
+              ),
             ),
             SizedBox(
               height: 20,
             ),
             TextFormField(
               // autofocus: true,
+              controller: emailController,
+              validator: _validateLogin,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                prefixIcon: Icon(Icons.email),
                 labelText: "E-mail",
                 labelStyle: TextStyle(
                   color: Colors.black87,
@@ -44,9 +115,12 @@ class LoginPage extends StatelessWidget {
             ),
             TextFormField(
               // autofocus: true,
+              controller: passwordController,
+              validator: _validatePassword,
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration: InputDecoration(
+                prefixIcon: Icon(Icons.lock),
                 labelText: "Senha",
                 labelStyle: TextStyle(
                   color: Colors.black87,
@@ -110,7 +184,9 @@ class LoginPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _login();
+                  },
                 ),
               ),
             ),
@@ -156,16 +232,16 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Container(
-              height: 40,
-              child: FlatButton(
-                child: Text(
-                  "Cadastre-se",
-                  textAlign: TextAlign.center,
-                ),
-                onPressed: () {},
-              ),
-            ),
+            // Container(
+            //   height: 40,
+            //   child: FlatButton(
+            //     child: Text(
+            //       "Cadastre-se",
+            //       textAlign: TextAlign.center,
+            //     ),
+            //     onPressed: () {},
+            //   ),
+            // ),
           ],
         ),
       ),

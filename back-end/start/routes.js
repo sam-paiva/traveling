@@ -12,9 +12,13 @@ Route.get('/', () => {
 Route.get('/destinations', 'DestinationController.index');
 
 //Hotels
-Route.get('/hotels', 'HotelController.getAll')
+Route.get('/hotels', 'HotelController.getAll');
 
 //Users
-Route.post('/users', 'UserController.create')
+Route.post('/users', 'UserController.create');
+Route.get('/users', 'UserController.getUserDataByEmail');
+
+//Sessions
+Route.post('/sessions', 'SessionController.login');
 
 

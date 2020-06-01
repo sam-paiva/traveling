@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile/models/hotel_model.dart';
+import 'package:mobile/pages/login/login_controller.dart';
 
 import 'hotel_controller.dart';
 
@@ -15,6 +16,8 @@ class HotelPage extends StatefulWidget {
 }
 
 class HotelState extends ModularState<HotelPage, HotelController> {
+  final loginController = Modular.get<LoginController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

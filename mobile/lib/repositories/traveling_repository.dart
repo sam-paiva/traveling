@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:mobile/models/destination_model.dart';
 import 'package:mobile/models/hotel_model.dart';
+import 'package:mobile/models/result_authentication_model.dart';
+import 'package:mobile/models/user_model.dart';
 
 class TravelingRepository {
   final Dio _dio = Dio();
@@ -33,6 +35,35 @@ class TravelingRepository {
           (response.data as List).map((i) => new Hotel.fromJson(i)).toList();
 
       return results;
+    }
+  }
+
+  Future<String> login(String email, String password) async {
+    FormData formData = new FormData.fromMap({
+      "email": email,
+      "password": password,
+    });
+
+    Response response = await _dio.post('$url/sessions', data: formData);
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      var result = ResultAuthentication.fromJson(response.data);
+
+      return result.token;
+    }
+  }
+
+  Future<User> getUserByEmail(String email) async {
+    Response response = await _dio.get('$url/users?email=' + email);
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      var result = User.fromJson(response.data);
+
+      return result;
     }
   }
 }

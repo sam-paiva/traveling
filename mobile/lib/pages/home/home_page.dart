@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobile/components/app_bar.dart';
+import 'package:mobile/components/custom_drawer.dart';
 import 'package:mobile/components/destination_carousel.dart';
 import 'package:mobile/components/hotels_carousel.dart';
 import 'package:mobile/pages/home/home_controller.dart';
@@ -68,6 +69,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         hotels: this.controller.hotels,
         showDialog: _showMyDialog,
       ),
+      drawer: CustomDrawer(),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 30.0),
@@ -97,7 +99,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       builder: (_) {
         return Scaffold(
           backgroundColor: Colors.white,
-          body: (this.controller.destination != null)
+          body: (this.controller.destination != null ||
+                  this.controller.hotels != null)
               ? _buildBody()
               : Center(
                   child: CircularProgressIndicator(),
