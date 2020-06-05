@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobile/pages/hotel/hotel_controller.dart';
 
 class FindHotelsPage extends StatefulWidget {
   @override
   _FindHotelsPageState createState() => _FindHotelsPageState();
 }
 
-class _FindHotelsPageState
-    extends ModularState<FindHotelsPage, HotelController> {
+class _FindHotelsPageState extends State<FindHotelsPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override

@@ -10,16 +10,10 @@ class LoginPage extends StatefulWidget {
   LoginState createState() => LoginState();
 }
 
-class LoginState extends ModularState<LoginPage, LoginController> {
+class LoginState extends State<LoginPage> {
+  final loginController = Modular.get<LoginController>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +21,10 @@ class LoginState extends ModularState<LoginPage, LoginController> {
       String email = emailController.text;
       String password = passwordController.text;
 
-      bool logged = await this.controller.login(email.trim(), password);
+      bool logged = await loginController.login(email.trim(), password);
 
       if (logged) {
-        this.controller.getUser(email);
+        this.loginController.getUser(email);
         Fluttertoast.showToast(
             msg: "Sucesso na autenticação",
             toastLength: Toast.LENGTH_SHORT,
@@ -175,13 +169,6 @@ class LoginState extends ModularState<LoginPage, LoginController> {
                         ),
                         textAlign: TextAlign.left,
                       ),
-                      Container(
-                        child: SizedBox(
-                          child: Image.asset("assets/bone.png"),
-                          height: 28,
-                          width: 28,
-                        ),
-                      )
                     ],
                   ),
                   onPressed: () {
@@ -216,13 +203,6 @@ class LoginState extends ModularState<LoginPage, LoginController> {
                         ),
                         textAlign: TextAlign.left,
                       ),
-                      Container(
-                        child: SizedBox(
-                          child: Image.asset("assets/fb-icon.png"),
-                          height: 28,
-                          width: 28,
-                        ),
-                      )
                     ],
                   ),
                   onPressed: () {},

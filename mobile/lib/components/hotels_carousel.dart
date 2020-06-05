@@ -17,7 +17,7 @@ class HotelCarousel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Top Hotéis',
+                'Recentes',
                 style: TextStyle(
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,

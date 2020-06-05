@@ -4,9 +4,10 @@ class Hotel {
   String address;
   String imageUrl;
   int price;
+  String city;
   String phone;
-  Null createdAt;
-  Null updatedAt;
+  String createdAt;
+  String updatedAt;
 
   Hotel(
       {this.id,
@@ -16,7 +17,8 @@ class Hotel {
       this.price,
       this.phone,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.city});
 
   Hotel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,6 +29,7 @@ class Hotel {
     price = json['price'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    city = json['city'];
   }
 
   Map<String, dynamic> toJson() {
@@ -38,6 +41,7 @@ class Hotel {
     data['price'] = this.price;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['city'] = this.city;
     return data;
   }
 }

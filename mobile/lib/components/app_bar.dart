@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile/models/hotel_model.dart';
 import 'package:mobile/pages/hotel/hotel_page.dart';
 import 'package:mobile/pages/login/login_controller.dart';

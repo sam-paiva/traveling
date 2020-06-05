@@ -15,8 +15,9 @@ class HotelPage extends StatefulWidget {
   HotelState createState() => HotelState();
 }
 
-class HotelState extends ModularState<HotelPage, HotelController> {
+class HotelState extends State<HotelPage> {
   final loginController = Modular.get<LoginController>();
+  final homeController = Modular.get<HotelController>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class HotelState extends ModularState<HotelPage, HotelController> {
           Stack(
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.width,
+                height: 300,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.0),
                   boxShadow: [
@@ -46,36 +48,6 @@ class HotelState extends ModularState<HotelPage, HotelController> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 40.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.grey,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          iconSize: 30.0,
-                          color: Colors.grey,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.sortAmountDown),
-                          iconSize: 25.0,
-                          color: Colors.grey,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
-                    ),
-                  ],
                 ),
               ),
             ],
@@ -100,31 +72,52 @@ class HotelState extends ModularState<HotelPage, HotelController> {
                   ),
                   Row(
                     children: <Widget>[
-                      Icon(
-                        Icons.location_on,
-                        size: 15.0,
-                        color: Colors.black,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(FontAwesomeIcons.city,
+                            size: 15.0, color: Colors.black),
                       ),
-                      SizedBox(width: 5.0),
                       Text(
-                        'Endereço: ' + widget.hotel.address,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                      SizedBox(width: 5.0),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Icon(FontAwesomeIcons.phone,
-                          size: 15.0, color: Colors.black),
-                      Text(
-                        widget.hotel.phone,
+                        widget.hotel.city,
                         style: TextStyle(fontSize: 20, color: Colors.black),
                       )
                     ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.location_on,
+                          size: 15.0,
+                          color: Colors.black,
+                        ),
+                        SizedBox(width: 5.0),
+                        Text(
+                          widget.hotel.address,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(FontAwesomeIcons.phone,
+                            size: 15.0, color: Colors.black),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          widget.hotel.phone,
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),

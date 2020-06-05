@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile/pages/home/home_page.dart';
+import 'package:mobile/pages/hotel/create_hotel_page.dart';
 import 'package:mobile/pages/login/login_controller.dart';
 import 'package:mobile/pages/login/login_page.dart';
 
 class CustomDrawer extends StatelessWidget {
-  final loginController = Modular.get<LoginController>();
-
   @override
   Widget build(BuildContext context) {
+    final loginController = Modular.get<LoginController>();
+    debugPrint(loginController.token);
+
     Widget _authenticationList() {
       return Column(
         children: <Widget>[
@@ -18,7 +21,7 @@ class CustomDrawer extends StatelessWidget {
               subtitle: Text("Hotéis que eu postei"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                debugPrint('toquei no drawer');
+                debugPrint(loginController.token);
               }),
           ListTile(
               leading: Icon(Icons.account_circle),
@@ -26,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
               subtitle: Text("Configurações da conta"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                Navigator.pop(context);
+                //Navigator.pop(context);
               }),
           ListTile(
               leading: Icon(Icons.hotel),
@@ -34,7 +37,20 @@ class CustomDrawer extends StatelessWidget {
               subtitle: Text("Crie um novo hotel"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => CreateHotelPage()));
+                //Navigator.pop(context);
+              }),
+          ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text("Sair"),
+              subtitle: Text("Sair"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                loginController.logout();
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => HomePage()));
+                //Navigator.pop(context);
               })
         ],
       );
@@ -52,6 +68,16 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (_) => LoginPage()));
               }),
+          ListTile(
+              leading: Icon(Icons.hotel),
+              title: Text("Postar novo hotel"),
+              subtitle: Text("Crie um novo hotel"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => CreateHotelPage()));
+                //Navigator.pop(context);
+              }),
         ],
       );
     }
@@ -59,7 +85,7 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          (loginController.token != null && loginController.token != '')
+          (loginController.token != null)
               ? UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     color: Colors.red,
@@ -84,8 +110,7 @@ class CustomDrawer extends StatelessWidget {
                           image: AssetImage('assets/Traveling(1).png'),
                           fit: BoxFit.cover)),
                 ),
-          (this.loginController.token != null &&
-                  this.loginController.token != '')
+          (loginController.token != null)
               ? Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: _authenticationList(),

@@ -3,11 +3,12 @@ import 'package:mobile/models/destination_model.dart';
 import 'package:mobile/models/hotel_model.dart';
 import 'package:mobile/models/result_authentication_model.dart';
 import 'package:mobile/models/user_model.dart';
+import 'package:mobile/viewModels/create_hotel_vm.dart';
 
 class TravelingRepository {
   final Dio _dio = Dio();
 
-  String url = 'http://10.0.2.2:3333';
+  String url = 'http://192.168.11.6:3333'; //Url para emulador
 
   Future<List<Destination>> getDestinations() async {
     try {
@@ -64,6 +65,27 @@ class TravelingRepository {
       var result = User.fromJson(response.data);
 
       return result;
+    }
+  }
+
+  Future<bool> storeHotel(CreateHotelViewModel model) async {
+    FormData formData = new FormData.fromMap({
+      "name": model.name,
+      "address": model.address,
+      "price": model.price,
+      "phone": model.phone,
+      "city": model.city,
+      "userId": model.userId,
+      "imageBase64": await MultipartFile.fromFile(model.imageBase64.path,
+          filename: model.name)
+    });
+
+    Response response = await _dio.post('$url/hotels', data: formData);
+
+    if (response.statusCode != 204) {
+      return false;
+    } else {
+      return true;
     }
   }
 }

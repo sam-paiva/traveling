@@ -23,6 +23,7 @@ dependencies:
   fluttertoast: ^4.0.0
   font_awesome_flutter: ^8.5.0
   shared_preferences: 0.5.7+3
+  image_picker: 0.6.7
   mobx: ^1.0.2+1
   flutter:
     sdk: flutter

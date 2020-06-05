@@ -4,6 +4,7 @@ import 'package:mobile/pages/destination/destination_controller.dart';
 import 'package:mobile/pages/destination/destination_page.dart';
 import 'package:mobile/pages/home/home_controller.dart';
 import 'package:mobile/pages/home/home_page.dart';
+import 'package:mobile/pages/hotel/create_hotel_page.dart';
 import 'package:mobile/pages/hotel/hotel_controller.dart';
 import 'package:mobile/pages/hotel/hotel_page.dart';
 import 'package:mobile/pages/login/login_controller.dart';
@@ -29,6 +30,7 @@ class AppModule extends MainModule {
         Router("/destination", child: (_, args) => DestinationPage()),
         Router("/hotel", child: (_, args) => HotelPage()),
         Router("/login", child: (_, args) => LoginPage()),
+        Router("/create-hotel", child: (_, args) => CreateHotelPage())
       ];
 
   //widget principal

@@ -12,7 +12,6 @@ abstract class _HomeControllerBase with Store {
   final api = Modular.get<TravelingRepository>();
 
   _HomeControllerBase() {
-    getDestinations();
     getHotels();
   }
 

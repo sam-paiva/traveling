@@ -4,15 +4,9 @@
 const Model = use('Model')
 
 class Hotel extends Model {
-
-    destination() {
-        return this.belongsTo('App/Models/Destination')
-    }
-
     user() {
-        return this.belongsTo('App/Models/User')
+        return this.belongsTo('App/Models/User');
     }
-
 }
 
 module.exports = Hotel

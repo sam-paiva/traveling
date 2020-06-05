@@ -13,6 +13,7 @@ Route.get('/destinations', 'DestinationController.index');
 
 //Hotels
 Route.get('/hotels', 'HotelController.getAll');
+Route.post('/hotels', 'HotelController.storeHotel');
 
 //Users
 Route.post('/users', 'UserController.create');
